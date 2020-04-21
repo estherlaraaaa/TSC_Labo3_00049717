@@ -1,6 +1,6 @@
 enum lines {NOLINE,SINGLELINE,DOUBLELINE};
 enum modes {NOMODE,INT_FLOAT,INT_INT_INT};
-enum parameters {THERMAL_CONDUCTIVITY,HEAT_SOURCE};
+enum parameters {CONSTANTE_E,CONSTANTE_A,CONSTANTE_F};
 enum sizes {NODES,ELEMENTS,DIRICHLET,NEUMANN};
 
 class item{
@@ -77,16 +77,17 @@ class condition: public item{
 };
 
 class mesh{
-        float parameters[2];
+        float parameters[3];
         int sizes[4]; 
         node *node_list;
         element *element_list;
         condition *dirichlet_list;
         condition *neumann_list;
     public:
-        void setParameters(float k,float Q){
-            parameters[THERMAL_CONDUCTIVITY]=k;
-            parameters[HEAT_SOURCE]=Q;
+        void setParameters(float E,float A, float F){
+            parameters[CONSTANTE_E]=E;
+            parameters[CONSTANTE_A]=A;
+            parameters[CONSTANTE_F]=F;
         }
         void setSizes(int nnodes,int neltos,int ndirich,int nneu){
             sizes[NODES] = nnodes;
